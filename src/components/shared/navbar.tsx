@@ -35,54 +35,65 @@ export function Navbar() {
   const links = isLoggedIn ? loggedInLinks : loggedOutLinks;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md transition-colors duration-300">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-heading text-lg font-bold"
+          className="flex items-center gap-2 font-heading text-xl font-extrabold tracking-tight text-foreground transition-all hover:opacity-90"
         >
-          <FiCpu className="h-6 w-6 text-primary" />
-          ModelNest<span className="text-primary">AI</span>
+          <FiCpu className="h-6 w-6 text-orange-500" />
+          ModelNest<span className="text-orange-500">AI</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-6 md:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        {/* Desktop Nav - Pill Styled container */}
+        <nav className="hidden items-center gap-1 rounded-full border border-border bg-muted/60 p-1 md:flex">
+          {links.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all",
+                  isActive
+                    ? "bg-secondary text-foreground shadow-md shadow-black/10"
+                    : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right side */}
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle />
           {isLoggedIn ? (
-            <Button variant="outline" size="sm" className="rounded-full">
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full"
+            >
               Logout
             </Button>
           ) : (
-            <>
+            <div className="flex items-center gap-3">
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="rounded-full">
+                <span className="text-sm font-semibold text-muted-foreground transition-all hover:text-foreground cursor-pointer px-3 py-1.5">
                   Login
-                </Button>
+                </span>
               </Link>
               <Link href="/register">
-                <Button size="sm" className="rounded-full">
-                  Register
+                <Button
+                  size="sm"
+                  className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-5 text-sm font-semibold text-white shadow-md shadow-orange-500/10 hover:from-orange-600 hover:to-amber-600 transition-all duration-300 border-0"
+                >
+                  Get Started
                 </Button>
               </Link>
-            </>
+            </div>
           )}
         </div>
 
@@ -93,37 +104,38 @@ export function Navbar() {
             <SheetTrigger
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon" }),
-                "rounded-full",
+                "rounded-full text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
               <FiMenu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-72">
+            <SheetContent side="right" className="w-72 border-border bg-background text-foreground">
               <SheetHeader>
-                <SheetTitle className="font-heading">ModelNestAI</SheetTitle>
+                <SheetTitle className="font-heading text-foreground">ModelNestAI</SheetTitle>
               </SheetHeader>
               <nav className="mt-6 flex flex-col gap-4 px-4">
                 {links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`text-base font-medium ${
+                    className={cn(
+                      "text-base font-medium transition-colors",
                       pathname === link.href
-                        ? "text-primary"
-                        : "text-foreground"
-                    }`}
+                        ? "text-orange-500"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
                   >
                     {link.label}
                   </Link>
                 ))}
-                <div className="mt-4 flex flex-col gap-2">
+                <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
                   {isLoggedIn ? (
                     <Button variant="outline" className="rounded-full">
                       Logout
                     </Button>
                   ) : (
                     <>
-                      <Link href="/login">
+                      <Link href="/login" className="w-full">
                         <Button
                           variant="outline"
                           className="w-full rounded-full"
@@ -131,8 +143,8 @@ export function Navbar() {
                           Login
                         </Button>
                       </Link>
-                      <Link href="/register">
-                        <Button className="w-full rounded-full">
+                      <Link href="/register" className="w-full">
+                        <Button className="w-full rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600 border-0">
                           Register
                         </Button>
                       </Link>

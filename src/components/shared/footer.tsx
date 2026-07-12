@@ -14,33 +14,33 @@ const companyLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <footer className="border-t border-border bg-background text-muted-foreground transition-colors duration-300">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
           {/* Brand */}
-          <div>
+          <div className="space-y-4">
             <Link
               href="/"
-              className="flex items-center gap-2 font-heading text-lg font-bold"
+              className="flex items-center gap-2 font-heading text-xl font-extrabold tracking-tight text-foreground hover:opacity-90"
             >
-              <FiCpu className="h-6 w-6 text-primary" />
-              ModelNest<span className="text-primary">AI</span>
+              <FiCpu className="h-6 w-6 text-orange-500" />
+              ModelNest<span className="text-orange-500">AI</span>
             </Link>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Discover and buy AI tools & subscriptions at prices that make
-              sense.
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Discover and buy AI tools &amp; subscriptions at prices that make
+              sense. Sell your custom-trained weights and API tools.
             </p>
           </div>
 
           {/* Explore */}
           <div>
-            <h3 className="font-heading text-sm font-semibold">Marketplace</h3>
-            <ul className="mt-4 space-y-2">
+            <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">Marketplace</h3>
+            <ul className="mt-4 space-y-2.5">
               {exploreLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>
@@ -51,13 +51,13 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="font-heading text-sm font-semibold">Company</h3>
-            <ul className="mt-4 space-y-2">
+            <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">Company</h3>
+            <ul className="mt-4 space-y-2.5">
               {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                   </Link>
@@ -68,20 +68,20 @@ export function Footer() {
 
           {/* Contact + Social */}
           <div>
-            <h3 className="font-heading text-sm font-semibold">Get in Touch</h3>
+            <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">Get in Touch</h3>
             <a
               href="mailto:hello@modelnestai.com"
-              className="mt-4 flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+              className="mt-4 flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              <FiMail className="h-4 w-4" />
+              <FiMail className="h-4 w-4 text-orange-500" />
               hello@modelnestai.com
             </a>
-            <div className="mt-4 flex items-center gap-3">
+            <div className="mt-6 flex items-center gap-4">
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-primary"
+                className="rounded-full bg-muted p-2 text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
               >
                 <FiGithub className="h-5 w-5" />
               </a>
@@ -89,7 +89,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-primary"
+                className="rounded-full bg-muted p-2 text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
               >
                 <FiLinkedin className="h-5 w-5" />
               </a>
@@ -97,7 +97,7 @@ export function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-primary"
+                className="rounded-full bg-muted p-2 text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
               >
                 <FiTwitter className="h-5 w-5" />
               </a>
@@ -105,8 +105,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border/50 pt-6 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} ModelNestAI. All rights reserved.
+        <div className="mt-12 border-t border-border pt-8 text-center text-xs text-muted-foreground">
+          © {new Date().getFullYear()} ModelNestAI. All rights reserved. Built for developers and creators.
         </div>
       </div>
     </footer>
