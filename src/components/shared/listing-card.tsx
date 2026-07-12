@@ -26,7 +26,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
             />
           </div>
           <span className="text-sm font-medium text-muted-foreground">
-            {listing.category}
+            {listing.name}
           </span>
         </div>
 

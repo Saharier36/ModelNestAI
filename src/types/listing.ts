@@ -1,6 +1,7 @@
 export interface Listing {
   _id: string;
   title: string;
+  name: string;
   category: string;
   shortDescription: string;
   fullDescription?: string;

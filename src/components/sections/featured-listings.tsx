@@ -12,6 +12,7 @@ const featuredListings: Listing[] = [
   {
     _id: "1",
     title: "ChatGPT Plus — 1 Month Access",
+    name: "ChatGPT",
     category: "Chatbot",
     shortDescription:
       "Full GPT-4o access with image, voice, and plugin support.",
@@ -26,6 +27,7 @@ const featuredListings: Listing[] = [
   {
     _id: "2",
     title: "Midjourney Pro Plan",
+    name: "Midjourney",
     category: "Image Generation",
     shortDescription:
       "Unlimited relaxed generations with commercial usage rights.",
@@ -40,6 +42,7 @@ const featuredListings: Listing[] = [
   {
     _id: "3",
     title: "GitHub Copilot Business",
+    name: "GitHub Copilot",
     category: "Coding",
     shortDescription: "AI pair programmer for your team, IDE-integrated.",
     price: 9,
@@ -53,6 +56,7 @@ const featuredListings: Listing[] = [
   {
     _id: "4",
     title: "Claude Pro Subscription",
+    name: "Claude",
     category: "Chatbot",
     shortDescription: "Extended context window with priority access to Claude.",
     price: 11,
