@@ -1,7 +1,8 @@
 "use client";
 
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetContent,
@@ -89,10 +90,13 @@ export function Navbar() {
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <FiMenu className="h-5 w-5" />
-              </Button>
+            <SheetTrigger
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "rounded-full",
+              )}
+            >
+              <FiMenu className="h-5 w-5" />
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <SheetHeader>
