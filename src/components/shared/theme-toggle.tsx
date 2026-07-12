@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { useTheme } from "next-themes";
-import { FiSun, FiMoon } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
+import * as React from "react";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
