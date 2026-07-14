@@ -61,7 +61,7 @@ export function FAQ() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="mt-10"
       >
-        <Accordion type="single" className="w-full">
+        <Accordion className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
               <AccordionTrigger className="text-left font-heading text-base font-semibold">

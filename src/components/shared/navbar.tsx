@@ -112,21 +112,16 @@ export function Navbar() {
             </div>
           ) : isLoggedIn ? (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  type="button"
-                  className="flex cursor-pointer items-center justify-center rounded-full transition hover:opacity-80"
-                >
-                  <Avatar>
-                    <AvatarImage
-                      src={user.image ?? undefined}
-                      alt={displayName}
-                    />
-                    <AvatarFallback className="bg-linear-to-br from-orange-500 to-amber-500 text-xs font-semibold text-white">
-                      {initials}
-                    </AvatarFallback>
-                  </Avatar>
-                </button>
+              <DropdownMenuTrigger className="flex cursor-pointer items-center justify-center rounded-full transition hover:opacity-80 bg-transparent border-none p-0">
+                <Avatar>
+                  <AvatarImage
+                    src={user.image ?? undefined}
+                    alt={displayName}
+                  />
+                  <AvatarFallback className="bg-linear-to-br from-orange-500 to-amber-500 text-xs font-semibold text-white">
+                    {initials}
+                  </AvatarFallback>
+                </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuGroup>

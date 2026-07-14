@@ -1,11 +1,11 @@
 "use client";
 
+import { ListingCard } from "@/components/shared/listing-card";
+import { Button } from "@/components/ui/button";
+import type { Listing } from "@/types/listing";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
-import { ListingCard } from "@/components/shared/listing-card";
-import type { Listing } from "@/types/listing";
 
 // Temporary sample data — will be replaced with real API data later
 const featuredListings: Listing[] = [
@@ -19,8 +19,7 @@ const featuredListings: Listing[] = [
     price: 12,
     originalPrice: 20,
     discountPercent: 40,
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80",
+    logo: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80",
     rating: 4.8,
     reviewCount: 214,
   },
@@ -34,8 +33,7 @@ const featuredListings: Listing[] = [
     price: 18,
     originalPrice: 30,
     discountPercent: 40,
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80",
+    logo: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80",
     rating: 4.9,
     reviewCount: 158,
   },
@@ -48,8 +46,7 @@ const featuredListings: Listing[] = [
     price: 9,
     originalPrice: 19,
     discountPercent: 53,
-    image:
-      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80",
+    logo: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80",
     rating: 4.7,
     reviewCount: 302,
   },
@@ -62,8 +59,7 @@ const featuredListings: Listing[] = [
     price: 11,
     originalPrice: 20,
     discountPercent: 45,
-    image:
-      "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&q=80",
+    logo: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&q=80",
     rating: 4.9,
     reviewCount: 176,
   },
