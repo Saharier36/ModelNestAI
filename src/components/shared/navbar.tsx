@@ -35,8 +35,8 @@ const loggedOutLinks = [
 const loggedInLinks = [
   { href: "/", label: "Home" },
   { href: "/explore", label: "Explore" },
-  { href: "/items/add", label: "Add Item" },
-  { href: "/items/manage", label: "Manage Items" },
+  { href: "/items/add", label: "Add Model" },
+  { href: "/items/manage", label: "Manage Models" },
   { href: "/dashboard", label: "Dashboard" },
 ];
 
@@ -132,10 +132,21 @@ export function Navbar() {
                 <DropdownMenuGroup>
                   <DropdownMenuLabel className="px-2 py-3">
                     <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => router.push("/profile")}
-                        className="transition hover:opacity-80 cursor-pointer"
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push("/profile");
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            router.push("/profile");
+                          }
+                        }}
+                        tabIndex={0}
+                        role="button"
+                        className="transition hover:opacity-80 cursor-pointer rounded-full"
                       >
                         <Avatar className="h-8 w-8">
                           <AvatarImage
@@ -146,7 +157,7 @@ export function Navbar() {
                             {initials}
                           </AvatarFallback>
                         </Avatar>
-                      </button>
+                      </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-semibold text-foreground">
                           {displayName}
