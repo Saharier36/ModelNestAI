@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { FiCpu, FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
-import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
+import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { FiCpu, FiEye, FiEyeOff, FiLock, FiMail } from "react-icons/fi";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,6 +20,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,10 +36,13 @@ export default function LoginPage() {
       { email, password },
       {
         onSuccess: () => {
+          toast.success("Logged in successfully");
           router.push("/");
         },
         onError: (ctx) => {
-          setError(ctx.error.message || "Invalid email or password.");
+          const message = ctx.error.message || "Invalid email or password.";
+          setError(message);
+          toast.error(message);
         },
       },
     );
@@ -44,7 +50,15 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    await authClient.signIn.social({ provider: "google", callbackURL: "/" });
+    setGoogleLoading(true);
+    try {
+      await authClient.signIn.social({ provider: "google", callbackURL: "/" });
+      toast.success("Redirecting to Google sign-in");
+    } catch {
+      toast.error("Google sign-in failed");
+    } finally {
+      setGoogleLoading(false);
+    }
   };
 
   return (
@@ -71,10 +85,15 @@ export default function LoginPage() {
       <button
         type="button"
         onClick={handleGoogleLogin}
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer"
+        disabled={googleLoading || loading}
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
       >
-        <FcGoogle className="h-4 w-4" />
-        Continue with Google
+        {googleLoading ? (
+          <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
+        ) : (
+          <FcGoogle className="h-4 w-4" />
+        )}
+        {googleLoading ? "Connecting..." : "Continue with Google"}
       </button>
 
       <div className="mt-5 flex items-center gap-3">
@@ -144,10 +163,17 @@ export default function LoginPage() {
 
         <Button
           type="submit"
-          disabled={loading}
+          disabled={loading || googleLoading}
           className="w-full rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600 cursor-pointer"
         >
-          {loading ? "Logging in..." : "Log In"}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Logging in...
+            </span>
+          ) : (
+            "Log In"
+          )}
         </Button>
       </form>
 
