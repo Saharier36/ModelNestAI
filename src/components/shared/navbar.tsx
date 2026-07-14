@@ -58,7 +58,7 @@ export function Navbar() {
                   "rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all",
                   isActive
                     ? "bg-secondary text-foreground shadow-md shadow-black/10"
-                    : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
+                    : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
                 )}
               >
                 {link.label}
@@ -74,7 +74,7 @@ export function Navbar() {
             <Button
               variant="outline"
               size="sm"
-              className="rounded-full"
+              className="rounded-full cursor-pointer"
             >
               Logout
             </Button>
@@ -88,7 +88,7 @@ export function Navbar() {
               <Link href="/register">
                 <Button
                   size="sm"
-                  className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-5 text-sm font-semibold text-white shadow-md shadow-orange-500/10 hover:from-orange-600 hover:to-amber-600 transition-all duration-300 border-0"
+                  className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-5 text-sm font-semibold text-white shadow-md shadow-orange-500/10 hover:from-orange-600 hover:to-amber-600 transition-all duration-300 border-0 cursor-pointer"
                 >
                   Get Started
                 </Button>
@@ -109,9 +109,14 @@ export function Navbar() {
             >
               <FiMenu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 border-border bg-background text-foreground">
+            <SheetContent
+              side="right"
+              className="w-72 border-border bg-background text-foreground"
+            >
               <SheetHeader>
-                <SheetTitle className="font-heading text-foreground">ModelNestAI</SheetTitle>
+                <SheetTitle className="font-heading text-foreground">
+                  ModelNestAI
+                </SheetTitle>
               </SheetHeader>
               <nav className="mt-6 flex flex-col gap-4 px-4">
                 {links.map((link) => (
@@ -122,7 +127,7 @@ export function Navbar() {
                       "text-base font-medium transition-colors",
                       pathname === link.href
                         ? "text-orange-500"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     {link.label}
@@ -130,7 +135,7 @@ export function Navbar() {
                 ))}
                 <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
                   {isLoggedIn ? (
-                    <Button variant="outline" className="rounded-full">
+                    <Button variant="outline" className="rounded-full cursor-pointer">
                       Logout
                     </Button>
                   ) : (

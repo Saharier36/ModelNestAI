@@ -63,7 +63,7 @@ export function Newsletter() {
               />
               <Button
                 type="submit"
-                className="h-12 shrink-0 rounded-full bg-white px-6 text-orange-600 hover:bg-white/90"
+                className="h-12 shrink-0 rounded-full bg-white px-6 text-orange-600 hover:bg-white/90 cursor-pointer"
               >
                 Subscribe
                 <FiArrowRight className="ml-1 h-4 w-4" />

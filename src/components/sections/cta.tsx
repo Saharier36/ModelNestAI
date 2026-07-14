@@ -34,7 +34,7 @@ export function CTA() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <Link href="/explore">
-            <Button className="h-12 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-8 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 hover:from-orange-600 hover:to-amber-600">
+            <Button className="h-12 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-8 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 hover:from-orange-600 hover:to-amber-600 cursor-pointer">
               Explore Marketplace
               <FiArrowRight className="ml-1 h-4 w-4" />
             </Button>
@@ -42,7 +42,7 @@ export function CTA() {
           <Link href="/register">
             <Button
               variant="outline"
-              className="h-12 rounded-full border-border px-8 text-sm font-semibold hover:bg-muted"
+              className="h-12 rounded-full border-border px-8 text-sm font-semibold hover:bg-muted cursor-pointer"
             >
               Create Free Account
             </Button>

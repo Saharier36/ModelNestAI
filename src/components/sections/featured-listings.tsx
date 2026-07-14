@@ -88,7 +88,7 @@ export function FeaturedListings() {
           </p>
         </div>
         <Link href="/explore" className="shrink-0">
-          <Button variant="outline" className="rounded-full">
+          <Button variant="outline" className="rounded-full cursor-pointer">
             View All
             <FiArrowRight className="ml-1 h-4 w-4" />
           </Button>

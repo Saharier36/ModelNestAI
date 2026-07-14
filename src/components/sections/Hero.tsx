@@ -141,14 +141,14 @@ export function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Link href="/explore">
-            <Button className="h-12 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-8 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 hover:from-orange-600 hover:to-amber-600 transition-all duration-300">
+            <Button className="h-12 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-8 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 hover:from-orange-600 hover:to-amber-600 transition-all duration-300 cursor-pointer">
               Explore Models
             </Button>
           </Link>
           <Link href="/items/add">
             <Button
               variant="outline"
-              className="h-12 rounded-full border-border bg-transparent px-8 text-sm font-semibold text-foreground hover:bg-muted transition-all duration-300"
+              className="h-12 rounded-full border-border bg-transparent px-8 text-sm font-semibold text-foreground hover:bg-muted transition-all duration-300 cursor-pointer"
             >
               Sell AI Tools
             </Button>

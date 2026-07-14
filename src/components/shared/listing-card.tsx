@@ -73,7 +73,11 @@ export function ListingCard({ listing }: { listing: Listing }) {
 
       <div className="mt-auto border-t border-border pt-3">
         <Link href={`/listing/${listing._id}`}>
-          <Button className="w-full rounded-full" variant="outline" size="sm">
+          <Button
+            className="w-full rounded-full cursor-pointer"
+            variant="outline"
+            size="sm"
+          >
             View Details
             <FiArrowUpRight className="ml-1 h-3.5 w-3.5" />
           </Button>
