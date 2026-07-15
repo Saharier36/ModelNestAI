@@ -4,3 +4,14 @@ export const authClient = createAuthClient({
   baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
 });
 export const { signIn, signUp, signOut, useSession } = authClient;
+
+export async function getAuthToken(): Promise<string | null> {
+  try {
+    const res = await fetch("/api/auth/token", { credentials: "include" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.token ?? null;
+  } catch {
+    return null;
+  }
+}

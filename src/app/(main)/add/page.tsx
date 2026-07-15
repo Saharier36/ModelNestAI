@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useSession } from "@/lib/auth-client";
+import { useSession, getAuthToken } from "@/lib/auth-client";
 import { API_BASE_URL } from "@/lib/api-client";
 
 const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
@@ -140,14 +140,22 @@ export default function AddModelPage() {
         .split(",")
         .map((f) => f.trim())
         .filter(Boolean),
-      sellerId: session?.user?.id,
       sellerName: session?.user?.name,
     };
 
     try {
+      const token = await getAuthToken();
+
+      if (!token) {
+        throw new Error("You must be logged in to publish a model.");
+      }
+
       const res = await fetch(`${API_BASE_URL}/api/listings`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(payload),
       });
       const data = await res.json();

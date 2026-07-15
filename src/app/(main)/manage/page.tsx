@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { API_BASE_URL } from "@/lib/api-client";
-import { useSession } from "@/lib/auth-client";
+import { getAuthToken, useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { motion } from "framer-motion";
@@ -74,9 +74,13 @@ export default function ManageModelsPage() {
   const handleDelete = async (id: string) => {
     setDeletingId(id);
     try {
+      const token = await getAuthToken();
       const res = await fetch(`${API_BASE_URL}/api/listings/${id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ sellerId: session?.user?.id }),
       });
       const data = await res.json();
