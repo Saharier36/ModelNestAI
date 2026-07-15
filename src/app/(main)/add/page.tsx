@@ -262,7 +262,10 @@ export default function AddModelPage() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div className="space-y-2 sm:col-span-1">
               <Label htmlFor="category">Category *</Label>
-              <Select value={category} onValueChange={setCategory}>
+              <Select
+                value={category}
+                onValueChange={(value) => setCategory(value ?? "")}
+              >
                 <SelectTrigger id="category" className="w-full">
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
