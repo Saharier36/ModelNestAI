@@ -4,18 +4,31 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FiCpu, FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
+import {
+  FiCpu,
+  FiEye,
+  FiEyeOff,
+  FiLock,
+  FiMail,
+  FiUser,
+  FiCamera,
+} from "react-icons/fi";
 import { toast } from "sonner";
+
+const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
 
 export default function RegisterPage() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +37,55 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageUploading, setImageUploading] = useState(false);
+
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select a valid image file.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image must be smaller than 5MB.");
+      return;
+    }
+
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const uploadImageToImgbb = async (file: File): Promise<string | null> => {
+    if (!IMGBB_API_KEY) {
+      toast.error("Image upload is not configured.");
+      return null;
+    }
+    setImageUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+        { method: "POST", body: formData },
+      );
+      const data = await res.json();
+
+      if (!data.success) {
+        throw new Error("Upload failed");
+      }
+      return data.data.url as string;
+    } catch {
+      toast.error("Profile picture upload failed. You can add one later.");
+      return null;
+    } finally {
+      setImageUploading(false);
+    }
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,8 +105,15 @@ export default function RegisterPage() {
     }
 
     setLoading(true);
+
+    let imageUrl: string | undefined;
+    if (imageFile) {
+      const uploadedUrl = await uploadImageToImgbb(imageFile);
+      if (uploadedUrl) imageUrl = uploadedUrl;
+    }
+
     await authClient.signUp.email(
-      { name, email, password },
+      { name, email, password, image: imageUrl },
       {
         onSuccess: () => {
           toast.success("Account created successfully");
@@ -93,6 +162,44 @@ export default function RegisterPage() {
         <p className="mt-1 text-sm text-muted-foreground">
           Join the marketplace to buy and sell AI tools.
         </p>
+      </div>
+
+      {/* Profile picture upload */}
+      <div className="mt-6 flex flex-col items-center gap-2">
+        <div className="relative">
+          <Avatar className="h-20 w-20 border-2 border-border">
+            <AvatarImage
+              src={imagePreview ?? undefined}
+              alt="Profile preview"
+            />
+            <AvatarFallback className="bg-muted">
+              <FiUser className="h-8 w-8 text-muted-foreground" />
+            </AvatarFallback>
+          </Avatar>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={imageUploading}
+            className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-orange-500 text-white shadow-sm transition-colors hover:bg-orange-600 disabled:opacity-70"
+            aria-label="Upload profile picture"
+          >
+            {imageUploading ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <FiCamera className="h-3.5 w-3.5" />
+            )}
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageSelect}
+            className="hidden"
+          />
+        </div>
+        <span className="text-xs text-muted-foreground">
+          Add a profile picture (optional)
+        </span>
       </div>
 
       <button
