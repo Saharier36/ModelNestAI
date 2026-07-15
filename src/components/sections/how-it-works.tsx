@@ -11,7 +11,7 @@ import {
 const steps = [
   {
     icon: FiSearch,
-    title: "Browse Listings",
+    title: "Browse Models",
     description:
       "Explore hundreds of AI tools and subscriptions across every category.",
   },

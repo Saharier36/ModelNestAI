@@ -10,9 +10,9 @@ import { motion } from "framer-motion";
 
 const faqs = [
   {
-    question: "How do I know a listing is legitimate?",
+    question: "How do I know a Model is legitimate?",
     answer:
-      "Every seller creates an account and listings are tied to their profile. Reviews and ratings from past buyers help you judge trustworthiness before purchasing.",
+      "Every seller creates an account and models are tied to their profile. Reviews and ratings from past buyers help you judge trustworthiness before purchasing.",
   },
   {
     question: "What payment methods are supported?",

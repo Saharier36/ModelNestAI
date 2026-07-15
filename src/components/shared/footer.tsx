@@ -3,7 +3,7 @@ import { FiCpu, FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
 
 const exploreLinks = [
   { href: "/explore", label: "Explore Tools" },
-  { href: "/items/add", label: "Sell an AI Tool" },
+  { href: "/add", label: "Sell an AI Tool" },
   { href: "/dashboard", label: "Dashboard" },
 ];
 

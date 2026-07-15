@@ -39,7 +39,7 @@ export function Newsletter() {
             Get Deals Before Anyone Else
           </h2>
           <p className="mx-auto mt-3 max-w-md text-white/85">
-            Subscribe to hear about new discounted AI tool listings the moment
+            Subscribe to hear about new discounted AI tool Models the moment
             they go live.
           </p>
 

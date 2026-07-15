@@ -125,7 +125,7 @@ export default function ProfilePage() {
                 Your account is active and ready to use.
               </p>
               <div className="mt-5 rounded-2xl bg-orange-500/10 p-4 text-sm text-orange-700 dark:text-orange-300">
-                Keep your profile updated to make listings and conversations
+                Keep your profile updated to make models and conversations
                 smoother.
               </div>
             </div>

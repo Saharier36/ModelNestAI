@@ -166,7 +166,7 @@ export function Navbar() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     className="cursor-pointer data-highlighted:bg-orange-100 data-highlighted:text-orange-700 dark:data-highlighted:bg-orange-500/20 dark:data-highlighted:text-orange-300"
-                    onClick={() => router.push("/items/add")}
+                    onClick={() => router.push("/add")}
                   >
                     Add Model
                   </DropdownMenuItem>

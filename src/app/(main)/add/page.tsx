@@ -240,7 +240,7 @@ export default function AddModelPage() {
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="title">Listing Title *</Label>
+              <Label htmlFor="title">Model Title *</Label>
               <Input
                 id="title"
                 placeholder="e.g. ChatGPT Plus Access"
@@ -308,7 +308,7 @@ export default function AddModelPage() {
             <Label htmlFor="shortDescription">Short Description *</Label>
             <Input
               id="shortDescription"
-              placeholder="One-line summary shown on the listing card"
+              placeholder="One-line summary shown on the model card"
               value={shortDescription}
               onChange={(e) => setShortDescription(e.target.value)}
             />

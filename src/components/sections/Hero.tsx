@@ -145,7 +145,7 @@ export function Hero() {
               Explore Models
             </Button>
           </Link>
-          <Link href="/items/add">
+          <Link href="/add">
             <Button
               variant="outline"
               className="h-12 rounded-full border-border bg-transparent px-8 text-sm font-semibold text-foreground hover:bg-muted transition-all duration-300 cursor-pointer"
