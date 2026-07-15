@@ -195,7 +195,7 @@ export default function ManageModelsPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="rounded-full"
+                              className="rounded-full cursor-pointer"
                             >
                               <FiEye className="h-3.5 w-3.5" />
                               <span className="hidden sm:inline">View</span>
@@ -210,7 +210,7 @@ export default function ManageModelsPage() {
                                   variant: "outline",
                                   size: "sm",
                                 }),
-                                "rounded-full text-destructive hover:bg-destructive/10 hover:text-destructive",
+                                "rounded-full text-destructive hover:bg-destructive/10 hover:text-destructive cursor-pointer",
                               )}
                             >
                               {deletingId === listing._id ? (
@@ -233,12 +233,12 @@ export default function ManageModelsPage() {
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel className="rounded-full">
+                                <AlertDialogCancel className="rounded-full cursor-pointer">
                                   Cancel
                                 </AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() => handleDelete(listing._id)}
-                                  className="rounded-full bg-destructive text-white hover:bg-destructive/90"
+                                  className="rounded-full bg-destructive text-white hover:bg-destructive/90 cursor-pointer"
                                 >
                                   Delete
                                 </AlertDialogAction>

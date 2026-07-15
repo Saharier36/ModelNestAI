@@ -10,8 +10,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FiCpu, FiEye, FiEyeOff, FiLock, FiMail } from "react-icons/fi";
+import { FiCpu, FiEye, FiEyeOff, FiLock, FiMail, FiZap } from "react-icons/fi";
 import { toast } from "sonner";
+
+const DEMO_EMAIL = "demo@modelnestai.com";
+const DEMO_PASSWORD = "demo12345";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -61,6 +64,12 @@ export default function LoginPage() {
     }
   };
 
+  const handleDemoLogin = () => {
+    setEmail(DEMO_EMAIL);
+    setPassword(DEMO_PASSWORD);
+    toast.success("Demo credentials filled in");
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -84,9 +93,18 @@ export default function LoginPage() {
 
       <button
         type="button"
+        onClick={handleDemoLogin}
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2.5 text-sm font-medium text-orange-500 transition-colors hover:bg-orange-500/15 cursor-pointer"
+      >
+        <FiZap className="h-4 w-4" />
+        Use Demo Credentials
+      </button>
+
+      <button
+        type="button"
         onClick={handleGoogleLogin}
         disabled={googleLoading || loading}
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+        className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
       >
         {googleLoading ? (
           <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
