@@ -1,71 +1,40 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ListingCard } from "@/components/shared/listing-card";
+import { ListingCardSkeleton } from "@/components/shared/listing-card-skeleton";
 import { Button } from "@/components/ui/button";
+import { API_BASE_URL } from "@/lib/api-client";
 import type { Listing } from "@/types/listing";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
-// Temporary sample data — will be replaced with real API data later
-const featuredListings: Listing[] = [
-  {
-    _id: "1",
-    title: "ChatGPT Plus — 1 Month Access",
-    name: "ChatGPT",
-    category: "Chatbot",
-    shortDescription:
-      "Full GPT-4o access with image, voice, and plugin support.",
-    price: 12,
-    originalPrice: 20,
-    discountPercent: 40,
-    logo: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80",
-    rating: 4.8,
-    reviewCount: 214,
-  },
-  {
-    _id: "2",
-    title: "Midjourney Pro Plan",
-    name: "Midjourney",
-    category: "Image Generation",
-    shortDescription:
-      "Unlimited relaxed generations with commercial usage rights.",
-    price: 18,
-    originalPrice: 30,
-    discountPercent: 40,
-    logo: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80",
-    rating: 4.9,
-    reviewCount: 158,
-  },
-  {
-    _id: "3",
-    title: "GitHub Copilot Business",
-    name: "GitHub Copilot",
-    category: "Coding",
-    shortDescription: "AI pair programmer for your team, IDE-integrated.",
-    price: 9,
-    originalPrice: 19,
-    discountPercent: 53,
-    logo: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80",
-    rating: 4.7,
-    reviewCount: 302,
-  },
-  {
-    _id: "4",
-    title: "Claude Pro Subscription",
-    name: "Claude",
-    category: "Chatbot",
-    shortDescription: "Extended context window with priority access to Claude.",
-    price: 11,
-    originalPrice: 20,
-    discountPercent: 45,
-    logo: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&q=80",
-    rating: 4.9,
-    reviewCount: 176,
-  },
-];
-
 export function FeaturedListings() {
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `${API_BASE_URL}/api/listings?sort=ratingHighToLow&limit=4`,
+        );
+        const data = await res.json();
+        if (data.success) {
+          setListings(data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch featured listings:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeatured();
+  }, []);
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-24">
       <motion.div
@@ -92,18 +61,28 @@ export function FeaturedListings() {
       </motion.div>
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {featuredListings.map((listing, index) => (
-          <motion.div
-            key={listing._id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-          >
-            <ListingCard listing={listing} />
-          </motion.div>
-        ))}
+        {loading
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <ListingCardSkeleton key={i} />
+            ))
+          : listings.map((listing, index) => (
+              <motion.div
+                key={listing._id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+              >
+                <ListingCard listing={listing} />
+              </motion.div>
+            ))}
       </div>
+
+      {!loading && listings.length === 0 ? (
+        <p className="mt-10 text-center text-muted-foreground">
+          No models available yet. Be the first to add one!
+        </p>
+      ) : null}
     </section>
   );
 }
