@@ -30,14 +30,15 @@ import { toast } from "sonner";
 const loggedOutLinks = [
   { href: "/", label: "Home" },
   { href: "/explore", label: "Explore" },
+  { href: "/about", label: "About" },
 ];
 
 const loggedInLinks = [
   { href: "/", label: "Home" },
   { href: "/explore", label: "Explore" },
+  { href: "/about", label: "About" },
   { href: "/add", label: "Add Model" },
   { href: "/manage", label: "Manage Models" },
-  { href: "/about", label: "About" },
 ];
 
 export function Navbar() {
