@@ -19,11 +19,18 @@ export function FeaturedListings() {
       setLoading(true);
       try {
         const res = await fetch(
-          `${API_BASE_URL}/api/listings?sort=ratingHighToLow&limit=4`,
+          `${API_BASE_URL}/api/listings?sort=ratingHighToLow&limit=20`,
         );
         const data = await res.json();
-        if (data.success) {
-          setListings(data.data);
+
+        if (data.success && Array.isArray(data.data)) {
+          const shuffledListings = [...data.data].sort(
+            () => 0.5 - Math.random(),
+          );
+
+          const randomFour = shuffledListings.slice(0, 4);
+
+          setListings(randomFour);
         }
       } catch (error) {
         console.error("Failed to fetch featured listings:", error);
